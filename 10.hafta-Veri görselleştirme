@@ -1,0 +1,172 @@
+# VERİ GÖRSELLEŞTİRME
+## Sınıflama
+### erkek-kadın
+## sıralama
+### ilkokul-lise-üniversite
+## eşit aralıklı
+### sıcaklığın 0 derece olması 
+## oranlama
+
+# Kategorik Değişkenler
+# Çubuk Grafikleri
+x = c (rep("erkek",30), rep("kadın", 50))
+frekans = table(x) #frekans tablosu
+
+barplot(frekans, 
+        main = "Bar Grafiği",
+        xlab = "Cinsiyet",
+        ylab = "Frekans",
+        col = c("steelblue", "darkred"),
+        horiz = T # F varsayılan değerdir
+        )
+
+eğitim_kod = round(runif(n = 80, min = 1, max = 4))
+eğitim = NULL
+for( i in 1:80){
+  eğitim = switch(eğitim_kod[i], "ilkokul","ortaokul","lise","üniversite")
+}
+ÇT = table(x,eğitim) # çapraz tablo(crosstab)
+
+barplot(ÇT, legend.text = rownames(ÇT), 
+        main = "Bar Grafiği",
+        xlab = "Cinsiyet",
+        ylab = "Frekans",
+        col = c("steelblue", "darkred"),
+        beside = T,
+        ylim = c(0,25)
+)
+
+## Pasta Grafiği
+pie(frekans,main = "Pasta Grafiği",
+    col = c("steelblue", "darkred")
+    )
+# pie 3D 
+library(plotrix)
+pie3D(frekans,main = "Pasta Grafiği-3D",
+    col = c("steelblue", "darkred"),
+    explode = 0.2
+)
+
+fan.plot(frekans,main = "Pasta Grafiği",
+         col = c("steelblue", "darkred"))
+
+## Sürekli değişkenler
+# Histogram
+
+set.seed(2022)
+##rastgele not üret
+not = 50+10*rnorm(100)
+summary(not)
+# basit histogram
+hist(not)
+# renklendirme
+hist(not,col = "red",main = "Histogram Grafiği",
+     xlab = "Notlar",
+     ylab = "Frekans",
+     breaks = 12)
+histogram = hist(not,col = "red",main = "Histogram Grafiği",
+     xlab = "Notlar",
+     ylab = "Frekans",
+     breaks = 12)
+histogram
+
+xfit = seq(min(not), max(not), length = 100)
+yfit = dnorm(xfit, mean=mean,length = 100)
+
+
+#Box Plot
+#outlier bulma
+summary(not)
+IQR =56.50-44.45
+boxplot(not,
+        col ="steelblue")
+
+str(iris)
+boxplot(iris$Sepal.Length~iris$Species,
+        col =c("steelblue","darkred","purple"),
+        main = "BOXPLOT",
+        xlab = "Türler")
+
+## Çizgi grafiği
+set.seed(2022)
+x = rnorm(100)
+y = 2+3*x+rnorm(100)
+
+plot(x,y,
+     col = c("steelblue","darkred"),
+     main ="Dağılım Grafiği")
+head(pressure)
+
+plot(pressure)
+
+plot(x,y,
+     col = c("steelblue","darkred"),
+     main ="Dağılım Grafiği")
+
+cor(x,y)
+
+set.seed(2022)
+x = rnorm(100)
+y = 3+2*x^2+rnorm(100)
+
+plot(x,y,
+     col = c("steelblue","darkred"),
+     main ="Dağılım Grafiği")
+
+set.seed(2022)
+x = rnorm(100)
+y = 2+3*x+rnorm(100)
+
+plot(x,y,
+     col = c("steelblue","darkred"),
+     main ="Dağılım Grafiği",
+     type="o", # type o,h,p,b,l eğerlerini alabilir
+     xlab ="x",
+     ylab = "y",
+     pch = 23, # noktaların şekli
+     bg ="blue",#içinin rengi
+     bty = "o",
+     cex = 2,
+     lwd = 1,
+     lty = 3
+     )
+# grafiğe ızgara ekleme
+plot(x,y,
+     col = c("steelblue","darkred"),
+     main ="Dağılım Grafiği",
+     type="o", # type o,h,p,b,l eğerlerini alabilir
+     xlab ="x",
+     ylab = "y",
+     pch = 23, # noktaların şekli
+     bg ="blue",#içinin rengi
+     bty = "o",
+     cex = 2,
+     lwd = 1,
+     lty = 3
+)+
+  grid()
+## abline ()
+plot(pressure)
+abline(h=600, v = 250, 
+       col = c("red","blue"))
+
+## par frow
+set.seed(2022)
+x = rnorm(100)
+y = 2+3*x+rnorm(100)
+
+  
+## png ve jpeg formatları kaydetme
+getwd()
+setwd("C:/Users/Asus/Desktop/VERİ BİLİMİ YÜKSEK LİSANS/bilgisayar programlama")
+getwd()
+
+png(filename = "ilkGrafik.png")
+plot(iris[,3:4])
+dev.off()
+
+png(filename = "ilkGrafik1.jpg")
+plot(iris[,2:3])
+dev.off()
+
+
